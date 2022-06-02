@@ -34,13 +34,10 @@ int main(int argc, char* argv[])
 
 void f1(double x, double y, double t, double* ret)
 {
-	// TODO: Descobrir quina equació hem de posar aquí
-	// TODO: Implementar f1
-	*ret = 0;
+	*ret = x;
 }
 void f2(double x, double y, double t, double* ret)
 {
-	// TODO: Descobrir quina equació hem de posar aquí
-	// TODO: Implementar f2
-	*ret = 0
+	// TODO: Descobrir d'on venen els valors de alpha i m/L
+	*ret = -alpha * y - m/L sin(y);
 }
