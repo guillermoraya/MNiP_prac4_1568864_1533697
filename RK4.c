@@ -7,9 +7,9 @@ void RK4 (double (*f1)(double, double, double, void*),
 			 double t0, double tf, int n, void *prm,
 			 void *prm2)
 {
-	double k[5]; //K per a la dimensió 'x'
-	double l[5]; //L són com els K però per a la dimensió 'y'
-	double h = (tf-t0)/(double)n; //Amplada dels subintervals
+	double k[5]; //K per a la dimensió 'x'.
+	double l[5]; //L són com els K però per a la dimensió 'y'.
+	double h = (tf-t0)/(double)n; //Amplada dels subintervals.
 	double t; //Variable per al pas del temps.
 	double aux_f1,aux_f2; //Variables auxiliars per a emmagatzemar els valors de les funcions f1 i f2.
 
@@ -18,7 +18,7 @@ void RK4 (double (*f1)(double, double, double, void*),
 	*y = y0;
 	t = t0;
 
-	// Bucle del RK4 en dues dimensions
+	// Bucle del RK4 en dues dimensions.
 	for(int i = 0; i < n; i++)
 	{
 		// Actualitzem la variable 't' per a indicar el pas del temps.
@@ -45,7 +45,7 @@ void RK4 (double (*f1)(double, double, double, void*),
 		f2(*x+k[2],*y+l[2],t+h,&aux_f2);
 		l[3] = h*aux_f2;
 
-		// ... i calculem els valors aproximats de 'x' i 'y' per al temps actual
+		// ... i calculem els valors aproximats de 'x' i 'y' per al temps actual.
 		*x += (k[0] + 2*k[1] + 2*k[2] + k[3])/6;
 		*y += (l[0] + 2*l[1] + 2*l[2] + l[3])/6;
 	}
