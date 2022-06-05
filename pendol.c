@@ -1,7 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include "RK4.h"
 
 void f1(double x, double y, double t, double* ret);
-void f2(double x, double y, double t, double* ret);
+void f2(double x, double y, double t, double alpha, double m, double L, double* ret);
 
 int main(int argc, char* argv[])
 {
@@ -25,8 +28,14 @@ int main(int argc, char* argv[])
 	double t0=atol(argv[6]);
 	double tf=atol(argv[7]);
 	double n=atol(argv[8]);
+	double *ret, *ret2, *prm, *prm2;
 	
-	/*TODO: Completar el main.*/
+	f1(x0,y0, t0, &ret);
+	f2(x0, y0, t0, alpha, m, L, &ret2);
+
+	RK4(ret, ret2, &x, &y, x0, y0, t0, tf, n, &prm, &prm2);
+
+	printf("%lf %lf %lf", tf, x, y);
 	
 	return 0;
 }
@@ -36,8 +45,7 @@ void f1(double x, double y, double t, double* ret)
 {
 	*ret = x;
 }
-void f2(double x, double y, double t, double* ret)
+void f2(double x, double y, double t, double alpha, double m, double L, double* ret)
 {
-	// TODO: Descobrir d'on venen els valors de alpha i m/L
 	*ret = -alpha * y - m/L sin(y);
 }
