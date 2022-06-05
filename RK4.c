@@ -1,4 +1,4 @@
-#include <math.h>
+#include "RK4.h"
 
 
 void RK4 (double (*f1)(double, double, double, void*),
@@ -12,12 +12,15 @@ void RK4 (double (*f1)(double, double, double, void*),
 	double h = (tf-t0)/(double)n; //Amplada dels subintervals.
 	double t; //Variable per al pas del temps.
 	double aux_f1,aux_f2; //Variables auxiliars per a emmagatzemar els valors de les funcions f1 i f2.
+	double *args = 0;
 
 	// Inicialització de variables de espai ('x' i 'y') i temps ('t').
 	*x = x0;
 	*y = y0;
 	t = t0;
-
+	
+	printf("t x y\n");
+	
 	// Bucle del RK4 en dues dimensions.
 	for(int i = 0; i < n; i++)
 	{
@@ -25,7 +28,7 @@ void RK4 (double (*f1)(double, double, double, void*),
 		t = t0 + i*h;
 
 		// Calculem els valors de les 'slopes' en dimensió 'x' i 'y' a punts intermitjos.
-		f1(*x,*y,t,&aux_f1);
+		aux_f1=f1(*x,*y,t,args);
 		k[0] = h*aux_f1;
 		f2(*x,*y,t,&aux_f2);
 		l[0] = h*aux_f2;
@@ -48,5 +51,7 @@ void RK4 (double (*f1)(double, double, double, void*),
 		// ... i calculem els valors aproximats de 'x' i 'y' per al temps actual.
 		*x += (k[0] + 2*k[1] + 2*k[2] + k[3])/6;
 		*y += (l[0] + 2*l[1] + 2*l[2] + l[3])/6;
+		
+		printf("&d &d &d\n",t,*x,*y);
 	}
 }
