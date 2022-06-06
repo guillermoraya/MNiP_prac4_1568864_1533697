@@ -11,8 +11,10 @@ gnuplot -persist <<-EOFMarker
     set yrange [-3:3]
     set xrange [-3.5:3.5]
     unset key
+    set term png
+    set output "plot.png" 
     plot "points.txt" u 2:3, "points2.txt" u 2:3, "points3.txt" u 2:3, "points4.txt" u 2:3  
 EOFMarker
 
 make clean
-make cleanP
+make cleanPoints

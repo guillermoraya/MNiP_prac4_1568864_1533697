@@ -8,5 +8,8 @@ pendol: pendol.c RK4.c
 clean: 
 	rm pendol
 
-cleanP:
+cleanPoints:
 	rm points*
+	
+cleanPlot:
+	rm plot.png
