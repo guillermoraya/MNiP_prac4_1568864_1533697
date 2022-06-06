@@ -11,8 +11,6 @@ void RK4 (double (*f1)(double, double, double, void*),
 	double l[5]; //L són com els K però per a la dimensió 'y'.
 	double h = (tf-t0)/(double)n; //Amplada dels subintervals.
 	double t; //Variable per al pas del temps.
-	double aux_f1,aux_f2; //Variables auxiliars per a emmagatzemar els valors de les funcions f1 i f2.
-	double *args = 0;
 
 	// Inicialització de variables de espai ('x' i 'y') i temps ('t').
 	*x = x0;
@@ -27,25 +25,17 @@ void RK4 (double (*f1)(double, double, double, void*),
 		t = t0 + i*h;
 
 		// Calculem els valors de les 'slopes' en dimensió 'x' i 'y' a punts intermitjos.
-		aux_f1=f1(*x,*y,t,args);
-		k[0] = h*aux_f1;
-		f2(*x,*y,t,&aux_f2);
-		l[0] = h*aux_f2;
+		k[0] = h*f1(*x,*y,t,prm);
+		l[0] = h*f2(*x,*y,t,prm);
 
-		f1(*x+k[0]/2,*y+l[0]/2,t+h/2,&aux_f1);
-		k[1] = h*aux_f1;
-		f2(*x+k[0]/2,*y+l[0]/2,t+h/2,&aux_f2);
-		l[1] = h*aux_f2;
+		k[1] = h*f1(*x+k[0]/2,*y+l[0]/2,t+h/2,prm);
+		l[1] = h*f2(*x+k[0]/2,*y+l[0]/2,t+h/2,prm);
 
-		f1(*x+k[1]/2,*y+l[1]/2,t+h/2,&aux_f1);
-		k[2] = h*aux_f1;
-		f2(*x+k[1]/2,*y+l[1]/2,t+h/2,&aux_f2);
-		l[2] = h*aux_f2;
+		k[2] = h*f1(*x+k[1]/2,*y+l[1]/2,t+h/2,prm);
+		l[2] = h*f2(*x+k[1]/2,*y+l[1]/2,t+h/2,prm);
 
-		f1(*x+k[2],*y+l[2],t+h,&aux_f1);
-		k[3] = h*aux_f1;
-		f2(*x+k[2],*y+l[2],t+h,&aux_f2);
-		l[3] = h*aux_f2;
+		k[3] = h*f1(*x+k[2],*y+l[2],t+h,prm);
+		l[3] = h*f2(*x+k[2],*y+l[2],t+h,prm);
 
 		// ... i calculem els valors aproximats de 'x' i 'y' per al temps actual.
 		*x += (k[0] + 2*k[1] + 2*k[2] + k[3])/6;

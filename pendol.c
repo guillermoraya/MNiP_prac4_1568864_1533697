@@ -1,7 +1,4 @@
-#include "RK4.h"/*
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>*/
+#include "RK4.h"
 
 
 double f1(double x, double y, double t, void* args);
@@ -28,10 +25,8 @@ int main(int argc, char* argv[])
 	double y0 = (double) atof(argv[5]);
 	int t0 = atof(argv[6]);
 	int tf = atof(argv[7]);
-	int n=atof(argv[8]);
-	double *prm;
-	
-	double args_f2[3]={alpha,m,L};
+	int n=atof(argv[8]);	
+	double args[3]={alpha,m,L};
 	
 	if(t0>tf)
 	{
@@ -45,7 +40,7 @@ int main(int argc, char* argv[])
 	printf("%8s %8s %8s\n","t", "x", "y");
 	for(int t=t0; t<tf; t++)
 	{
-		RK4(&f1, &f2, &x, &y, x, y, (double) t, (double) t+1, n,&prm,&args_f2);
+		RK4(&f1, &f2, &x, &y, x, y, (double) t, (double) t+1, n,&args,&args);
 		printf("%8d %8f %8f\n",t,x,y);
 	}
 	
@@ -55,7 +50,7 @@ int main(int argc, char* argv[])
 
 double f1(double x, double y, double t, void* args)
 {
-	return x;
+	return y;
 }
 double f2(double x, double y, double t, void* args)
 {
@@ -64,5 +59,6 @@ double f2(double x, double y, double t, void* args)
 	double m = *(double *)args;
 	args += sizeof(double);
 	double L = *(double *)args;
-	return -alpha * y - m*sin(y)/L;
-}
+	
+	return -alpha * y - sin(x)*m/L;
+}//plot "points.txt" u 2:3
