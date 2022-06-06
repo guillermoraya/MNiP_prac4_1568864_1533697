@@ -26,16 +26,16 @@ void RK4 (double (*f1)(double, double, double, void*),
 
 		// Calculem els valors de les 'slopes' en dimensió 'x' i 'y' a punts intermitjos.
 		k[0] = h*f1(*x,*y,t,prm);
-		l[0] = h*f2(*x,*y,t,prm);
+		l[0] = h*f2(*x,*y,t,prm2);
 
 		k[1] = h*f1(*x+k[0]/2,*y+l[0]/2,t+h/2,prm);
-		l[1] = h*f2(*x+k[0]/2,*y+l[0]/2,t+h/2,prm);
+		l[1] = h*f2(*x+k[0]/2,*y+l[0]/2,t+h/2,prm2);
 
 		k[2] = h*f1(*x+k[1]/2,*y+l[1]/2,t+h/2,prm);
-		l[2] = h*f2(*x+k[1]/2,*y+l[1]/2,t+h/2,prm);
+		l[2] = h*f2(*x+k[1]/2,*y+l[1]/2,t+h/2,prm2);
 
 		k[3] = h*f1(*x+k[2],*y+l[2],t+h,prm);
-		l[3] = h*f2(*x+k[2],*y+l[2],t+h,prm);
+		l[3] = h*f2(*x+k[2],*y+l[2],t+h,prm2);
 
 		// ... i calculem els valors aproximats de 'x' i 'y' per al temps actual.
 		*x += (k[0] + 2*k[1] + 2*k[2] + k[3])/6;

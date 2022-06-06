@@ -7,3 +7,6 @@ pendol: pendol.c RK4.c
 
 clean: 
 	rm pendol
+
+cleanP:
+	rm points*
