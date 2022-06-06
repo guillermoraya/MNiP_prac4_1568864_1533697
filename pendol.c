@@ -1,7 +1,7 @@
-#include "RK4.h"
+#include "RK4.h"/*
 #include <stdio.h>
 #include <math.h>
-#include <stdlib.h>
+#include <stdlib.h>*/
 
 
 double f1(double x, double y, double t, void* args);
