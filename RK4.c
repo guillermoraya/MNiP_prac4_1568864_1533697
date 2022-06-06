@@ -18,8 +18,7 @@ void RK4 (double (*f1)(double, double, double, void*),
 	*x = x0;
 	*y = y0;
 	t = t0;
-	
-	printf("t x y\n");
+
 	
 	// Bucle del RK4 en dues dimensions.
 	for(int i = 0; i < n; i++)
@@ -51,7 +50,5 @@ void RK4 (double (*f1)(double, double, double, void*),
 		// ... i calculem els valors aproximats de 'x' i 'y' per al temps actual.
 		*x += (k[0] + 2*k[1] + 2*k[2] + k[3])/6;
 		*y += (l[0] + 2*l[1] + 2*l[2] + l[3])/6;
-		
-		printf("&d &d &d\n",t,*x,*y);
-	}
+  }
 }
